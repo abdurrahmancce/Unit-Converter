@@ -63,10 +63,7 @@ UnitConverter/
 │
 ├── main.py
 ├── README.md
-│
-└── assets/
-    ├── screenshot-dark.png
-    └── screenshot-light.png
+
 ```
 
 ---
