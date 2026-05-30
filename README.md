@@ -172,9 +172,9 @@ A sleek interface optimized for low-light environments.
 
 ### ☀ Light Theme
 A clean and minimal design for daytime use.
+<img width="781" height="885" alt="image" src="https://github.com/user-attachments/assets/bbd42fde-c214-4c69-b885-e5ae1c062916" />
 
-
-Switch between themes instantly using the theme toggle button.
+```Switch between themes instantly using the theme toggle button.```
 
 ---
 
