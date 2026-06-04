@@ -1,17 +1,8 @@
-"""
-Unit Converter — A clean, beginner-friendly GUI app using Tkinter.
-Supports Temperature, Length, and Weight conversions.
-Features: Dark/Light theme, conversion history, real-time unit swapping, error handling.
-"""
-
 import tkinter as tk
 from tkinter import ttk
 from datetime import datetime
 
-
-# ─────────────────────────────────────────────
 #  CONVERSION LOGIC
-# ─────────────────────────────────────────────
 
 def convert_temperature(value: float, from_unit: str, to_unit: str) -> float:
     """Convert temperature between Celsius, Fahrenheit, and Kelvin."""
@@ -78,9 +69,7 @@ CATEGORIES = {
 }
 
 
-# ─────────────────────────────────────────────
 #  THEMES
-# ─────────────────────────────────────────────
 
 THEMES = {
     "dark": {
@@ -98,9 +87,7 @@ THEMES = {
 }
 
 
-# ─────────────────────────────────────────────
 #  APPLICATION
-# ─────────────────────────────────────────────
 
 class UnitConverterApp:
     def __init__(self, root: tk.Tk):
@@ -151,7 +138,7 @@ class UnitConverterApp:
 
         P = {"padx": 20, "pady": 6}
 
-        # ── Header ──────────────────────────────
+        #  Header 
         self.frm_header = tk.Frame(self.main)
         self.frm_header.pack(fill="x", padx=0, pady=0)
 
@@ -168,7 +155,7 @@ class UnitConverterApp:
         self.frm_sep = tk.Frame(self.main, height=1)
         self.frm_sep.pack(fill="x")
 
-        # ── Category Tabs ───────────────────────
+        #  Category Tabs 
         self.frm_cat = tk.LabelFrame(self.main, text=" CATEGORY ", font=self.font_label, bd=1, relief="flat")
         self.frm_cat.pack(fill="x", **P)
 
@@ -186,7 +173,7 @@ class UnitConverterApp:
             b.pack(side="left", padx=3)
             self.cat_btns[name] = b
 
-        # ── Converter Card ──────────────────────
+        #  Converter Card 
         self.frm_conv = tk.LabelFrame(self.main, text=" CONVERSION ", font=self.font_label, bd=1, relief="flat")
         self.frm_conv.pack(fill="x", **P)
 
@@ -231,7 +218,7 @@ class UnitConverterApp:
         self.combo_to.pack(side="right")
         self.combo_to.bind("<<ComboboxSelected>>", lambda e: self._live_convert())
 
-        # ── Result ──────────────────────────────
+        #  Result 
         self.frm_result = tk.LabelFrame(self.main, text=" RESULT ", font=self.font_label, bd=1, relief="flat")
         self.frm_result.pack(fill="x", **P)
 
@@ -240,7 +227,7 @@ class UnitConverterApp:
         self.lbl_formula = tk.Label(self.frm_result, text="", font=self.font_small, anchor="center")
         self.lbl_formula.pack(fill="x", padx=16, pady=(0, 14))
 
-        # ── Buttons ─────────────────────────────
+        #  Buttons 
         self.btn_convert = tk.Button(
             self.main, text="▶  CONVERT", font=self.font_btn,
             relief="flat", cursor="hand2", bd=0, padx=20, pady=12,
@@ -255,7 +242,7 @@ class UnitConverterApp:
         )
         self.btn_clear.pack(fill="x", padx=20, pady=(0, 4))
 
-        # ── History ─────────────────────────────
+        #  History 
         self.frm_hist = tk.LabelFrame(self.main, text=" HISTORY ", font=self.font_label, bd=1, relief="flat")
         self.frm_hist.pack(fill="x", padx=20, pady=(8, 4))
 
@@ -269,7 +256,7 @@ class UnitConverterApp:
         )
         self.btn_clrhist.pack(anchor="e", padx=8, pady=(0, 6))
 
-        # ── Footer ──────────────────────────────
+        #  Footer 
         self.lbl_footer = tk.Label(
             self.main, text="Python · Tkinter  •  Temperature · Length · Weight",
             font=("Courier New", 8)
@@ -280,7 +267,7 @@ class UnitConverterApp:
         self._inner_frames = [self.frm_from_row, self.frm_val_row,
                                self.frm_swap_row, self.frm_to_row, self.cat_row]
 
-    # ── Theme ──────────────────────────────────
+    #  Theme 
     def _toggle_theme(self):
         self.theme_name = "light" if self.theme_name == "dark" else "dark"
         self._apply_theme()
@@ -353,7 +340,7 @@ class UnitConverterApp:
 
         self._refresh_history_ui()
 
-    # ── Category ───────────────────────────────
+    #  Category 
     def _select_category(self, name: str):
         self.selected_cat = name
         self._on_category_change()
@@ -374,7 +361,7 @@ class UnitConverterApp:
         syms = CATEGORIES[self.selected_cat]["symbols"]
         self.lbl_sym.config(text=syms.get(self.from_var.get(), ""))
 
-    # ── Conversion ─────────────────────────────
+    #  Conversion 
     def _live_convert(self):
         self._update_sym()
         raw = self.entry_var.get().strip()
@@ -446,7 +433,7 @@ class UnitConverterApp:
         self.lbl_result.config(text=f"⚠  {msg}", fg=t["error"])
         self.lbl_formula.config(text="")
 
-    # ── Swap ───────────────────────────────────
+    #  Swap 
     def _swap_units(self):
         f, to = self.from_var.get(), self.to_var.get()
         self.from_var.set(to)
@@ -454,14 +441,14 @@ class UnitConverterApp:
         self._update_sym()
         self._live_convert()
 
-    # ── Clear ──────────────────────────────────
+    #  Clear 
     def _clear(self):
         self.entry_var.set("")
         t = self._t()
         self.lbl_result.config(text="—", fg=t["accent"])
         self.lbl_formula.config(text="")
 
-    # ── History ────────────────────────────────
+    #  History 
     def _refresh_history_ui(self):
         t = self._t()
         for w in self.hist_body.winfo_children():
