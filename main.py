@@ -471,9 +471,7 @@ class UnitConverterApp:
         self._refresh_history_ui()
 
 
-# ─────────────────────────────────────────────
 #  ENTRY POINT
-# ─────────────────────────────────────────────
 
 def main():
     root = tk.Tk()
